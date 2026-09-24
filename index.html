@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELETRO URNAS — Qualidade e Novidades em Um Lugar Só</title>
+  <meta name="description" content="ELETRO URNAS: A loja premium de eletrônicos. Smartphones, gadgets e as últimas novidades tecnológicas com qualidade garantida." />
+  <meta name="keywords" content="eletrônicos, iPhone, smartphones, gadgets, tecnologia, ELETRO URNAS" />
+  <meta property="og:title" content="ELETRO URNAS — Qualidade e Novidades em Um Lugar Só" />
+  <meta property="og:description" content="A loja premium de eletrônicos. Smartphones, gadgets e as últimas novidades tecnológicas." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="hero" class="hero" aria-label="Hero principal ELETRO URNAS">
+
+    <!-- NAV -->
+    <nav class="hero-nav" role="navigation" aria-label="Navegação principal">
+      <div class="nav-left">
+        <span class="nav-logo" id="nav-logo">ELETRO URNAS</span>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="#hero" class="nav-link nav-link--active" id="nav-home">Home</a></li>
+        <li><a href="#showcase" class="nav-link" id="nav-showcase">Aparelhos</a></li>
+        <li><a href="#catalogo" class="nav-link" id="nav-catalog">Catálogo</a></li>
+        <li><a href="#loja" class="nav-link" id="nav-store">A Loja</a></li>
+        <li><a href="#footer" class="nav-link" id="nav-contact">Contato</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-icon-btn" id="btn-search" aria-label="Buscar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="nav-icon-btn" id="btn-cart" aria-label="Carrinho">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+        <button class="nav-hamburger" id="btn-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO CONTENT -->
+    <div class="hero-content" id="hero-content">
+      <!-- Tag editorial superior -->
+      <div class="hero-tag" id="hero-tag">
+        <span class="hero-tag__dot"></span>
+        <span class="hero-tag__text">LANÇAMENTO EXCLUSIVO</span>
+      </div>
+
+      <!-- Título dominante -->
+      <h1 class="hero-title" id="hero-title">
+        <span class="hero-title__line" data-line="1">ELETRO</span>
+        <span class="hero-title__line" data-line="2">URNAS</span>
+      </h1>
+
+      <!-- Área inferior: sub info + CTAs -->
+      <div class="hero-bottom" id="hero-bottom">
+        <div class="hero-bottom__left">
+          <p class="hero-subtitle" id="hero-subtitle">NOVO IPHONE 18 PRO MAX</p>
+          <p class="hero-desc" id="hero-desc">QUALIDADE E NOVIDADES EM UM LUGAR SÓ.</p>
+        </div>
+        <div class="hero-bottom__right">
+          <a href="#showcase" class="hero-cta hero-cta--primary" id="cta-aparelhos">
+            <span>Explorar APARELHOS</span>
+            <svg class="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#loja" class="hero-cta hero-cta--secondary" id="cta-loja">
+            <span>Conhecer A LOJA</span>
+            <svg class="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Metadados flutuantes editoriais -->
+      <div class="hero-meta hero-meta--tl" id="hero-meta-tl" aria-hidden="true">
+        <span class="meta-label">TECH</span>
+        <span class="meta-num">001</span>
+      </div>
+      <div class="hero-meta hero-meta--br" id="hero-meta-br" aria-hidden="true">
+        <span class="meta-label">2026</span>
+      </div>
+    </div>
+
+    <!-- SPOTLIGHT LAYER (iPhone reveal) -->
+    <div class="hero-spotlight" id="hero-spotlight" aria-hidden="true">
+      <img
+        src="assets/iphone.png"
+        alt="iPhone 18 Pro Max"
+        class="spotlight-image"
+        id="spotlight-image"
+        draggable="false"
+      />
+    </div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="hero-scroll-indicator" id="hero-scroll-indicator" aria-hidden="true">
+      <span class="scroll-line"></span>
+      <span class="scroll-label">SCROLL</span>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2: PRODUCT SHOWCASE (iPhone 18 Pro Max)
+  ═══════════════════════════════════════════ -->
+  <section id="showcase" class="showcase" aria-label="Apresentação do iPhone 18 Pro Max">
+    <div class="showcase-glow-bg" aria-hidden="true"></div>
+
+    <div class="showcase-header">
+      <div class="showcase-badge">
+        <span class="pulse-dot"></span>
+        <span>NOVA GERAÇÃO // TITANIUM BLUE</span>
+      </div>
+      <h2 class="showcase-title">
+        <span>IPHONE 18 PRO MAX</span>
+        <span class="showcase-title__sub">FORÇA INIGUALÁVEL. DESIGN ESCULPIDO.</span>
+      </h2>
+      <p class="showcase-lead">
+        Forjado em titânio grau aeroespacial com o revolucionário chip A18 Pro. Um salto definitivo em inteligência computacional, autonomia de 36 horas e tela Super Retina XDR com 3.000 nits.
+      </p>
+    </div>
+
+    <div class="showcase-main-stage">
+      <!-- Left Specs Column -->
+      <div class="showcase-col showcase-col--left">
+        <div class="feat-card" data-feat="chip">
+          <div class="feat-icon">⚡</div>
+          <div class="feat-body">
+            <span class="feat-tag">CHIP A18 PRO</span>
+            <h3 class="feat-title">Arquitetura 3nm Ultra</h3>
+            <p class="feat-desc">6 núcleos de CPU e GPU de nível de console com Ray Tracing acelerado por hardware e Neural Engine de 35 TOPS.</p>
+          </div>
+        </div>
+        <div class="feat-card" data-feat="battery">
+          <div class="feat-icon">🔋</div>
+          <div class="feat-body">
+            <span class="feat-tag">BATERIA TITANIUM</span>
+            <h3 class="feat-title">Até 36 Horas</h3>
+            <p class="feat-desc">Densidade energética revolucionária que garante até dois dias de uso contínuo com recarga rápida sem fio 30W.</p>
+          </div>
+        </div>
+        <div class="feat-card" data-feat="body">
+          <div class="feat-icon">🛡️</div>
+          <div class="feat-body">
+            <span class="feat-tag">ENGENHARIA</span>
+            <h3 class="feat-title">Titânio Grau 5</h3>
+            <p class="feat-desc">Chassi forjado sob temperatura extrema, oferecendo a maior relação peso/resistência da história dos smartphones.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Phone Display with Interactive Hotspots -->
+      <div class="showcase-phone-center" id="showcase-phone-center">
+        <div class="phone-pedestal-light" aria-hidden="true"></div>
+        <div class="phone-model-wrap">
+          <img
+            src="assets/iphone.png"
+            alt="iPhone 18 Pro Max Titanium Blue"
+            class="showcase-phone-img"
+            id="showcase-phone-img"
+          />
+
+          <!-- Hotspots -->
+          <div class="hotspot hotspot--camera" style="top: 22%; left: 32%;">
+            <button class="hotspot-btn" aria-label="Detalhes da Câmera">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-core"></span>
+            </button>
+            <div class="hotspot-tooltip">
+              <strong>Câmera 48MP Pro</strong>
+              <span>Sensor Quad-Pixel com Zoom Óptico 5× e Modo Cinema 4K</span>
+            </div>
+          </div>
+
+          <div class="hotspot hotspot--action" style="top: 42%; left: 18%;">
+            <button class="hotspot-btn" aria-label="Botão de Ação">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-core"></span>
+            </button>
+            <div class="hotspot-tooltip">
+              <strong>Controle de Câmera</strong>
+              <span>Sensor de pressão tátil com gestos de toque deslizante</span>
+            </div>
+          </div>
+
+          <div class="hotspot hotspot--screen" style="top: 60%; right: 26%;">
+            <button class="hotspot-btn" aria-label="Tela Super Retina">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-core"></span>
+            </button>
+            <div class="hotspot-tooltip">
+              <strong>Super Retina XDR 6.9"</strong>
+              <span>OLED ProMotion 120Hz com brilho recorde de 3.000 nits</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-pedestal-reflection" aria-hidden="true"></div>
+      </div>
+
+      <!-- Right Specs Column -->
+      <div class="showcase-col showcase-col--right">
+        <div class="feat-card" data-feat="camera">
+          <div class="feat-icon">📸</div>
+          <div class="feat-body">
+            <span class="feat-tag">SISTEMA PRO</span>
+            <h3 class="feat-title">Câmera Tripla 48MP</h3>
+            <p class="feat-desc">Lente teleobjetiva periscópica com zoom óptico de 5× e gravação em ProRes Log 120 fps direto em SSD externo.</p>
+          </div>
+        </div>
+        <div class="feat-card" data-feat="display">
+          <div class="feat-icon">👁️</div>
+          <div class="feat-body">
+            <span class="feat-tag">TELA IMERSIVA</span>
+            <h3 class="feat-title">OLED 6.9” 120Hz</h3>
+            <p class="feat-desc">Bordas mais finas de qualquer dispositivo Apple. Vidro Ceramic Shield de 2ª geração duas vezes mais forte.</p>
+          </div>
+        </div>
+        <div class="feat-card" data-feat="connectivity">
+          <div class="feat-icon">🌐</div>
+          <div class="feat-body">
+            <span class="feat-tag">CONECTIVIDADE</span>
+            <h3 class="feat-title">Wi-Fi 7 & SOS Satélite</h3>
+            <p class="feat-desc">Downloads gigabit instantâneos e comunicação bidirecional de emergência sem necessidade de sinal celular.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Purchase Banner -->
+    <div class="showcase-action-bar">
+      <div class="showcase-price-box">
+        <span class="spb-label">A partir de</span>
+        <span class="spb-price">R$ 12.499</span>
+        <span class="spb-installments">ou 12x de R$ 1.041,58 sem juros</span>
+      </div>
+      <div class="showcase-actions">
+        <button class="btn-buy-showcase" id="btn-buy-hero-phone" data-id="iphone-18-pro-max" data-name="iPhone 18 Pro Max" data-price="12499" data-img="assets/iphone.png">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span>ADQUIRIR IPHONE 18 PRO MAX</span>
+        </button>
+        <a href="#catalogo" class="btn-explore-all">
+          <span>VER OUTROS APARELHOS</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3: ECOSSISTEMA & CATÁLOGO
+  ═══════════════════════════════════════════ -->
+  <section id="catalogo" class="catalogo-section" aria-label="Catálogo completo ELETRO URNAS">
+    <div class="catalogo-header">
+      <div class="catalogo-eyebrow">
+        <span>— ECOSSISTEMA ELETRO URNAS</span>
+        <span class="catalogo-count">6 DISPOSITIVOS EM DESTAQUE</span>
+      </div>
+      <h2 class="catalogo-title">
+        <span>DISPOSITIVOS QUE</span>
+        <span class="catalogo-title__accent">DEFINEM O PADRÃO</span>
+      </h2>
+      <p class="catalogo-sub">
+        Explore nossa seleção rigorosa dos aparelhos mais desejados do mundo. Todos originais, lacrados e com suporte técnico dedicado.
+      </p>
+
+      <!-- Search & Category Filters -->
+      <div class="catalogo-toolbar">
+        <div class="catalog-search-wrap">
+          <svg class="search-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Pesquisar produto pelo nome..." autocomplete="off" />
+          <button id="catalog-search-clear" class="search-clear-btn" aria-label="Limpar busca" style="display: none;">✕</button>
+        </div>
+
+        <div class="filter-bar" role="tablist" aria-label="Filtro de categorias">
+          <button class="filter-pill is-active" data-filter="all" role="tab" aria-selected="true">TODOS</button>
+          <button class="filter-pill" data-filter="smartphones" role="tab" aria-selected="false">SMARTPHONES</button>
+          <button class="filter-pill" data-filter="computers" role="tab" aria-selected="false">COMPUTADORES</button>
+          <button class="filter-pill" data-filter="audio" role="tab" aria-selected="false">ÁUDIO</button>
+          <button class="filter-pill" data-filter="tablets" role="tab" aria-selected="false">TABLETS</button>
+          <button class="filter-pill" data-filter="wearables" role="tab" aria-selected="false">SMARTWATCHES</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Product Grid -->
+    <div class="product-grid" id="product-grid">
+      <!-- Injetado dinamicamente via JavaScript -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4: A LOJA / EXPERIENCE
+  ═══════════════════════════════════════════ -->
+  <section id="loja" class="store-experience" aria-label="A Loja Eletro Urnas">
+    <div class="store-bg-layer" aria-hidden="true">
+      <img src="assets/store-bg.jpg" alt="Ambiente Loja Eletro Urnas" class="store-bg-img" />
+      <div class="store-overlay"></div>
+    </div>
+
+    <div class="store-content">
+      <span class="store-eyebrow">— A EXPERIÊNCIA ELETRO URNAS</span>
+      <h2 class="store-title">TECNOLOGIA ELEVADA À ARTE</h2>
+      <p class="store-desc">
+        Mais do que comercializar tecnologia, proporcionamos uma experiência de alta curadoria. Cada dispositivo entregue passa por uma rigorosa conferência de autenticidade, com atendimento personalizado antes, durante e após a compra.
+      </p>
+
+      <div class="store-pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="pillar-title">100% Lacrado & Oficial</h3>
+          <p class="pillar-text">Produtos genuínos, homologados e com garantia global de fábrica de 1 ano válida em qualquer autorizada Apple.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3 class="pillar-title">Envio Blindado Express</h3>
+          <p class="pillar-text">Despacho em até 24 horas úteis com rastreamento em tempo real e seguro total contra perdas ou danos.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <h3 class="pillar-title">Atendimento Concierge</h3>
+          <p class="pillar-text">Consultores prontos para tirar dúvidas, auxiliar na escolha do modelo ideal e acompanhar todo o seu pós-venda.</p>
+        </div>
+      </div>
+
+      <div class="store-cta-box">
+        <a href="https://wa.me/?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20Eletro%20Urnas" target="_blank" rel="noopener" class="btn-store-whatsapp" id="btn-whatsapp-hero">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>FALAR COM UM ESPECIALISTA VIA WHATSAPP</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer id="footer" class="footer" role="contentinfo" aria-label="Rodapé ELETRO URNAS">
+
+    <div class="footer-inner">
+
+      <!-- Marca gigante -->
+      <div class="footer-brand" id="footer-brand">
+        <span class="footer-brand__text">ELETRO<br/>URNAS</span>
+        <p class="footer-brand__statement">
+          Tecnologia que transforma.<br/>
+          Qualidade que permanece.
+        </p>
+      </div>
+
+      <!-- Links e sociais -->
+      <div class="footer-links-wrap" id="footer-links-wrap">
+        <div class="footer-col" id="footer-col-nav">
+          <span class="footer-col__title">NAVEGAÇÃO</span>
+          <ul role="list">
+            <li><a href="#hero" class="footer-link" id="fl-home">Início</a></li>
+            <li><a href="#showcase" class="footer-link" id="fl-showcase">iPhone 18 Pro</a></li>
+            <li><a href="#catalogo" class="footer-link" id="fl-catalog">Catálogo Completo</a></li>
+            <li><a href="#loja" class="footer-link" id="fl-story">A Experiência Loja</a></li>
+          </ul>
+        </div>
+        <div class="footer-col" id="footer-col-products">
+          <span class="footer-col__title">DISPOSITIVOS</span>
+          <ul role="list">
+            <li><a href="#catalogo" class="footer-link footer-filter-link" data-filter="smartphones" id="fl-phones">Smartphones (iPhone)</a></li>
+            <li><a href="#catalogo" class="footer-link footer-filter-link" data-filter="computers" id="fl-computers">MacBooks & iMacs</a></li>
+            <li><a href="#catalogo" class="footer-link footer-filter-link" data-filter="audio" id="fl-audio">AirPods & Fones</a></li>
+            <li><a href="#catalogo" class="footer-link footer-filter-link" data-filter="tablets" id="fl-tablets">iPads & Acessórios</a></li>
+          </ul>
+        </div>
+        <div class="footer-col" id="footer-col-social">
+          <span class="footer-col__title">ATENDIMENTO & REDES</span>
+          <ul role="list">
+            <li>
+              <a href="https://wa.me/?text=Ol%C3%A1%2C%20gostaria%20de%20um%20atendimento%20Eletro%20Urnas" target="_blank" rel="noopener" class="footer-link footer-link--social" id="fl-whatsapp" aria-label="WhatsApp ELETRO URNAS">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                WhatsApp Oficial
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link footer-link--social" id="fl-instagram" aria-label="Instagram ELETRO URNAS">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                @eletro.urnas
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link footer-link--social" id="fl-tiktok" aria-label="TikTok ELETRO URNAS">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.73a8.18 8.18 0 0 0 4.78 1.52V6.79a4.85 4.85 0 0 1-1.01-.1z"/></svg>
+                TikTok Eletro Urnas
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link footer-link--social" id="fl-youtube" aria-label="YouTube ELETRO URNAS">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+                Canal YouTube
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Linha divisória -->
+      <div class="footer-divider" aria-hidden="true"></div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom" id="footer-bottom">
+        <p class="footer-copyright" id="footer-copyright">
+          © 2026 ELETRO URNAS. Todos os direitos reservados.
+        </p>
+        <div class="footer-bottom__links">
+          <a href="#" class="footer-bottom__link" id="fl-privacy">Privacidade</a>
+          <a href="#" class="footer-bottom__link" id="fl-terms">Termos & Garantias</a>
+        </div>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Quick View Modal -->
+  <div class="product-modal" id="product-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="product-modal__backdrop" id="modal-backdrop"></div>
+    <div class="product-modal__content" id="modal-content">
+      <button class="product-modal__close" id="modal-close" aria-label="Fechar modal">✕</button>
+      <div class="product-modal__body" id="modal-body">
+        <!-- Injetado dinamicamente via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toast-notification" role="status" aria-live="polite">
+    <div class="toast-icon">✓</div>
+    <div class="toast-content">
+      <div class="toast-title">Adicionado com sucesso!</div>
+      <div class="toast-text" id="toast-text">Produto adicionado à sua sacola.</div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+    <button class="mobile-menu__close" id="btn-mobile-close" aria-label="Fechar menu">✕</button>
+    <ul class="mobile-menu__links" role="list">
+      <li><a href="#hero" class="mm-link" id="mm-home">Home</a></li>
+      <li><a href="#showcase" class="mm-link" id="mm-showcase">Aparelhos</a></li>
+      <li><a href="#catalogo" class="mm-link" id="mm-catalog">Catálogo</a></li>
+      <li><a href="#loja" class="mm-link" id="mm-store">A Loja</a></li>
+      <li><a href="#footer" class="mm-link" id="mm-contact">Contato</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       DRAWER DO CARRINHO DE COMPRAS
+  ═══════════════════════════════════════════ -->
+  <div class="cart-drawer-backdrop" id="cart-drawer-backdrop" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Carrinho de compras">
+    <div class="cart-drawer__header">
+      <div class="cart-drawer__title-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <h2 class="cart-drawer__title">Seu Carrinho</h2>
+        <span class="cart-drawer__count" id="cart-drawer-count">(0)</span>
+      </div>
+      <button class="cart-drawer__close" id="btn-close-cart" aria-label="Fechar carrinho">✕</button>
+    </div>
+
+    <!-- Lista de Itens do Carrinho -->
+    <div class="cart-drawer__body" id="cart-drawer-body">
+      <!-- Injetado dinamicamente via JavaScript -->
+    </div>
+
+    <!-- Rodapé com Cálculos e Ações -->
+    <div class="cart-drawer__footer" id="cart-drawer-footer">
+      <div class="cart-discount-banner" id="cart-discount-banner">
+        <!-- Notificação de desconto dinâmico -->
+      </div>
+      <div class="cart-summary-rows">
+        <div class="cart-summary-row">
+          <span class="cart-summary-label">Itens no Carrinho</span>
+          <span class="cart-summary-val" id="cart-summary-qty">0 itens</span>
+        </div>
+        <div class="cart-summary-row">
+          <span class="cart-summary-label">Subtotal</span>
+          <span class="cart-summary-val" id="cart-summary-subtotal">R$ 0,00</span>
+        </div>
+        <div class="cart-summary-row cart-summary-row--discount" id="cart-summary-discount-row">
+          <span class="cart-summary-label">Desconto Especial (10%)</span>
+          <span class="cart-summary-val text-accent" id="cart-summary-discount">- R$ 0,00</span>
+        </div>
+        <div class="cart-summary-row cart-summary-row--total">
+          <span class="cart-summary-label">Valor Final</span>
+          <span class="cart-summary-val" id="cart-summary-total">R$ 0,00</span>
+        </div>
+        <div class="cart-installments-text" id="cart-installments-info">
+          <!-- Parcelamento calculado via loop while -->
+        </div>
+      </div>
+      <div class="cart-drawer__actions">
+        <button class="btn-checkout" id="btn-checkout">
+          <span>FINALIZAR COMPRA</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-clear-cart" id="btn-clear-cart">Esvaziar Carrinho</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════
+       MODAL DE RESUMO DA COMPRA (CHECKOUT)
+  ═══════════════════════════════════════════ -->
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="checkout-modal__backdrop" id="checkout-modal-backdrop"></div>
+    <div class="checkout-modal__content">
+      <button class="checkout-modal__close" id="btn-close-checkout" aria-label="Fechar resumo">✕</button>
+      <div class="checkout-modal__header">
+        <span class="checkout-modal__eyebrow">— RESUMO DO PEDIDO</span>
+        <h2 class="checkout-modal__title">Confirmar Compra</h2>
+        <p class="checkout-modal__subtitle">Verifique os produtos escolhidos e as condições antes da confirmação final.</p>
+      </div>
+
+      <div class="checkout-modal__items" id="checkout-items-list">
+        <!-- Lista de itens do resumo injetada via JS -->
+      </div>
+
+      <div class="checkout-modal__totals" id="checkout-totals-box">
+        <!-- Totais calculados injetados via JS -->
+      </div>
+
+      <div class="checkout-modal__payment">
+        <span class="payment-title">Método de Pagamento Simulado:</span>
+        <div class="payment-options">
+          <label class="payment-option is-selected">
+            <input type="radio" name="payment-method" value="pix" checked />
+            <span>Pix Instantâneo (Aprovação imediata)</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment-method" value="card" />
+            <span>Cartão de Crédito em até 12x</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="checkout-modal__actions">
+        <button class="btn-confirm-order" id="btn-confirm-order">Confirmar e Finalizar Pedido</button>
+        <button class="btn-cancel-order" id="btn-cancel-order">Retornar ao Carrinho</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODAL DE SUCESSO DA COMPRA
+  ═══════════════════════════════════════════ -->
+  <div class="success-modal" id="success-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="success-modal__backdrop" id="success-modal-backdrop"></div>
+    <div class="success-modal__content">
+      <div class="success-icon-wrap">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 class="success-modal__title">Compra Concluída com Sucesso!</h2>
+      <p class="success-modal__subtitle">Seu pedido foi registrado e os produtos foram reservados com segurança.</p>
+      <div class="success-order-box" id="success-order-box">
+        <!-- Detalhes do pedido injetados via JS -->
+      </div>
+      <button class="btn-success-close" id="btn-close-success">Continuar Comprando</button>
+    </div>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
