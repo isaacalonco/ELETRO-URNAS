@@ -18,7 +18,9 @@ function renderizarCatalogo(lista) {
   if (lista.length === 0) {
     container.innerHTML = `
       <div class="catalog-empty-state">
-        <div class="catalog-empty-icon">🔍</div>
+        <div class="catalog-empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
         <h3 class="catalog-empty-title">Nenhum produto encontrado</h3>
         <p class="catalog-empty-desc">Não localizamos produtos correspondentes aos filtros ou à pesquisa informada.</p>
         <button class="btn-reset-filters" id="btn-reset-filters">Limpar Filtros e Busca</button>
@@ -54,20 +56,22 @@ function renderizarCatalogo(lista) {
   for (let i = 0; i < lista.length; i++) {
     let prod = lista[i];
     let temEstoque = prod.temEstoque();
-    let textoEstoque = temEstoque ? '✓ Em Estoque (' + prod.estoque + ' un.)' : '✕ Indisponível';
+    let iconeEstoque = temEstoque
+      ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'
+      : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    let textoEstoque = temEstoque ? iconeEstoque + ' Em Estoque (' + prod.estoque + ' un.)' : iconeEstoque + ' Indisponível';
     let classeEstoque = temEstoque ? 'is-available' : 'is-out';
     let classeCardExtra = prod.destaque ? 'cat-card--featured' : '';
     if (!temEstoque) classeCardExtra += ' is-unavailable';
 
     let badgeTopo = prod.destaque ? 'DESTAQUE' : (temEstoque ? prod.categoria.toUpperCase() : 'ESGOTADO');
-    let splitTexto = '12x de ' + formatarMoeda(prod.preco / 12);
 
     let specsHtml = '';
     for (let s = 0; s < prod.specs.length; s++) {
       specsHtml += '<li>' + prod.specs[s] + '</li>';
     }
 
-    let botaoTexto = temEstoque ? 'Adicionar +' : 'Indisponível';
+    let botaoTexto = temEstoque ? 'Adicionar' : 'Indisponível';
     let botaoClasse = temEstoque ? 'btn-card-add' : 'btn-card-add is-disabled';
     let botaoDisabled = temEstoque ? '' : 'disabled';
 
@@ -91,14 +95,15 @@ function renderizarCatalogo(lista) {
           <div class="cat-card__footer">
             <div class="cat-card__price-box">
               <span class="cat-card__price">${formatarMoeda(prod.preco)}</span>
-              <span class="cat-card__split">${splitTexto}</span>
             </div>
             <div class="cat-card__btns">
               <button class="${botaoClasse}" data-codigo="${prod.codigo}" aria-label="Adicionar ${prod.nome}" ${botaoDisabled}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                 ${botaoTexto}
               </button>
               <button class="btn-card-details" data-codigo="${prod.codigo}" aria-label="Detalhes ${prod.nome}">
-                Info →
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Info
               </button>
             </div>
           </div>
@@ -142,115 +147,196 @@ function adicionarAoCarrinho(codigo) {
 
 function atualizarCarrinhoUI() {
   const badge = $('#cart-badge');
-  const itemsContainer = $('#cart-items-list');
-  const emptyState = $('#cart-empty-state');
-  const footerElem = $('#cart-footer');
-  const subtotalElem = $('#cart-subtotal');
-  const discountElem = $('#cart-discount');
-  const discountNotice = $('#cart-discount-notice');
-  const totalElem = $('#cart-total');
-  const parcelasElem = $('#cart-split');
+  const countHeader = $('#cart-drawer-count');
+  const containerItens = $('#cart-drawer-body');
+  const qtyTotalElem = $('#cart-summary-qty');
+  const subtotalElem = $('#cart-summary-subtotal');
+  const discountElem = $('#cart-summary-discount');
+  const discountRow = $('#cart-summary-discount-row');
+  const totalElem = $('#cart-summary-total');
+  const bannerDesconto = $('#cart-discount-banner');
+  const feedbackCupom = $('#cart-coupon-feedback');
+  const inputCupom = $('#cart-coupon-input');
+  const btnApplyCoupon = $('#btn-apply-coupon');
 
-  let totalQtd = meuCarrinho.obterQuantidadeTotal();
+  let totalItens = meuCarrinho.obterQuantidadeTotal();
+  let subtotal = meuCarrinho.calcularSubtotal();
+  let desconto = meuCarrinho.calcularDesconto();
+  let valorFinal = meuCarrinho.calcularTotal();
+
   if (badge) {
-    badge.textContent = totalQtd;
+    badge.textContent = totalItens;
     badge.style.transform = 'scale(1.25)';
     setTimeout(() => { badge.style.transform = 'scale(1)'; }, 200);
   }
 
+  if (countHeader) {
+    countHeader.textContent = '(' + totalItens + ')';
+  }
+
+  if (qtyTotalElem) {
+    qtyTotalElem.textContent = totalItens + (totalItens === 1 ? ' item' : ' itens');
+  }
+
+  if (subtotalElem) {
+    subtotalElem.textContent = formatarMoeda(subtotal);
+  }
+
+  if (discountElem) {
+    discountElem.textContent = '- ' + formatarMoeda(desconto);
+  }
+
+  if (discountRow) {
+    discountRow.style.display = cupomAplicado && desconto > 0 ? 'flex' : 'none';
+  }
+
+  if (totalElem) {
+    totalElem.textContent = formatarMoeda(valorFinal);
+  }
+
+  if (bannerDesconto) {
+    if (cupomAplicado) {
+      bannerDesconto.className = 'cart-discount-banner is-active';
+      bannerDesconto.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span><strong>Cupom ORELHA10 ativo:</strong> 10% de desconto aplicado com sucesso!</span>
+      `;
+      bannerDesconto.style.display = 'flex';
+    } else {
+      bannerDesconto.className = 'cart-discount-banner is-notice';
+      bannerDesconto.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>Possui cupom? Digite <strong>ORELHA10</strong> abaixo para 10% de desconto.</span>
+      `;
+      bannerDesconto.style.display = totalItens > 0 ? 'flex' : 'none';
+    }
+  }
+
+  if (feedbackCupom) {
+    if (cupomAplicado) {
+      feedbackCupom.style.display = 'flex';
+      feedbackCupom.className = 'cart-coupon-feedback is-success';
+      feedbackCupom.innerHTML = `
+        <span>Cupom <strong>ORELHA10</strong> aplicado (-10%)</span>
+        <button type="button" class="btn-remove-coupon" id="btn-remove-coupon">Remover</button>
+      `;
+      if (inputCupom) {
+        inputCupom.value = 'ORELHA10';
+        inputCupom.disabled = true;
+      }
+      if (btnApplyCoupon) btnApplyCoupon.disabled = true;
+
+      const btnRemove = $('#btn-remove-coupon');
+      if (btnRemove) {
+        btnRemove.addEventListener('click', () => {
+          removerCupom();
+          if (inputCupom) {
+            inputCupom.value = '';
+            inputCupom.disabled = false;
+          }
+          if (btnApplyCoupon) btnApplyCoupon.disabled = false;
+          atualizarCarrinhoUI();
+          exibirToast('Cupom removido.', 'sucesso');
+        });
+      }
+    } else {
+      feedbackCupom.style.display = 'none';
+      feedbackCupom.innerHTML = '';
+      if (inputCupom) inputCupom.disabled = false;
+      if (btnApplyCoupon) btnApplyCoupon.disabled = false;
+    }
+  }
+
+  if (!containerItens) return;
+
   if (meuCarrinho.itens.length === 0) {
-    if (itemsContainer) itemsContainer.innerHTML = '';
-    if (emptyState) emptyState.style.display = 'flex';
-    if (footerElem) footerElem.style.display = 'none';
+    containerItens.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h3 class="cart-empty-title">Seu carrinho está vazio</h3>
+        <p class="cart-empty-desc">Nenhum produto adicionado até o momento. Navegue pelo catálogo e selecione seus dispositivos.</p>
+        <button class="btn-cart-shop" id="btn-cart-explore">Explorar Catálogo</button>
+      </div>
+    `;
+
+    const btnExplore = $('#btn-cart-explore');
+    if (btnExplore) {
+      btnExplore.addEventListener('click', () => {
+        fecharCarrinho();
+        const secCat = $('#catalogo');
+        if (secCat) secCat.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
     return;
   }
 
-  if (emptyState) emptyState.style.display = 'none';
-  if (footerElem) footerElem.style.display = 'block';
+  let itensHtml = '';
+  for (let i = 0; i < meuCarrinho.itens.length; i++) {
+    let item = meuCarrinho.itens[i];
+    let prod = item.produto;
+    let itemSubtotal = prod.preco * item.quantidade;
+    let podeAumentar = item.quantidade < prod.estoque;
 
-  let subtotal = meuCarrinho.calcularSubtotal();
-  let desconto = meuCarrinho.calcularDesconto();
-  let total = meuCarrinho.calcularTotal();
-
-  if (subtotalElem) subtotalElem.textContent = formatarMoeda(subtotal);
-  if (discountElem) discountElem.textContent = '- ' + formatarMoeda(desconto);
-  if (totalElem) totalElem.textContent = formatarMoeda(total);
-
-  if (discountNotice) {
-    if (subtotal >= valorMinimoDesconto) {
-      discountNotice.style.display = 'flex';
-    } else {
-      discountNotice.style.display = 'none';
-    }
-  }
-
-  if (parcelasElem) {
-    parcelasElem.textContent = 'ou até ' + calcularParcelamento(total);
-  }
-
-  if (itemsContainer) {
-    let htmlItens = '';
-    for (let i = 0; i < meuCarrinho.itens.length; i++) {
-      let item = meuCarrinho.itens[i];
-      let p = item.produto;
-      let subitem = p.preco * item.quantidade;
-      let estoqueRestante = p.estoque;
-
-      htmlItens += `
-        <div class="cart-item" data-codigo="${p.codigo}">
-          <div class="cart-item__thumb">
-            <img src="${p.imagem}" alt="${p.nome}" />
-          </div>
-          <div class="cart-item__details">
-            <h4 class="cart-item__title">${p.nome}</h4>
-            <span class="cart-item__unit-price">${formatarMoeda(p.preco)} un.</span>
-            <div class="cart-item__controls">
-              <button class="cart-qty-btn btn-minus" data-codigo="${p.codigo}" aria-label="Diminuir quantidade">−</button>
-              <span class="cart-item__qty">${item.quantidade}</span>
-              <button class="cart-qty-btn btn-plus" data-codigo="${p.codigo}" aria-label="Aumentar quantidade" ${item.quantidade >= estoqueRestante ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''}>+</button>
-              <button class="cart-item__remove" data-codigo="${p.codigo}" aria-label="Remover ${p.nome}">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                <span>Remover</span>
-              </button>
-            </div>
-          </div>
-          <div class="cart-item__subtotal">
-            <span>${formatarMoeda(subitem)}</span>
-          </div>
+    itensHtml += `
+      <div class="cart-item" data-codigo="${prod.codigo}">
+        <div class="cart-item__thumb">
+          <img src="${prod.imagem}" alt="${prod.nome}" />
         </div>
-      `;
-    }
-    itemsContainer.innerHTML = htmlItens;
-
-    $$('.btn-plus', itemsContainer).forEach(btn => {
-      btn.addEventListener('click', () => {
-        let cod = Number(btn.dataset.codigo);
-        let ok = meuCarrinho.aumentarQuantidade(cod);
-        if (ok) {
-          atualizarCarrinhoUI();
-        } else {
-          exibirToast('Limite de estoque atingido.', 'erro');
-        }
-      });
-    });
-
-    $$('.btn-minus', itemsContainer).forEach(btn => {
-      btn.addEventListener('click', () => {
-        let cod = Number(btn.dataset.codigo);
-        meuCarrinho.diminuirQuantidade(cod);
-        atualizarCarrinhoUI();
-      });
-    });
-
-    $$('.cart-item__remove', itemsContainer).forEach(btn => {
-      btn.addEventListener('click', () => {
-        let cod = Number(btn.dataset.codigo);
-        meuCarrinho.remover(cod);
-        atualizarCarrinhoUI();
-        exibirToast('Item removido do carrinho.', 'sucesso');
-      });
-    });
+        <div class="cart-item__info">
+          <h4 class="cart-item__title">${prod.nome}</h4>
+          <span class="cart-item__unit-price">Unitário: ${formatarMoeda(prod.preco)}</span>
+          <span class="cart-item__subtotal">Subtotal: ${formatarMoeda(itemSubtotal)}</span>
+        </div>
+        <div class="cart-item__controls">
+          <div class="qty-counter">
+            <button class="btn-qty btn-qty-minus" data-codigo="${prod.codigo}" aria-label="Diminuir quantidade">−</button>
+            <span class="qty-val">${item.quantidade}</span>
+            <button class="btn-qty btn-qty-plus" data-codigo="${prod.codigo}" ${podeAumentar ? '' : 'disabled'} aria-label="Aumentar quantidade">+</button>
+          </div>
+          <button class="btn-remove-item" data-codigo="${prod.codigo}" aria-label="Remover produto">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+      </div>
+    `;
   }
+
+  containerItens.innerHTML = itensHtml;
+
+  $$('.btn-qty-plus', containerItens).forEach(btn => {
+    btn.addEventListener('click', () => {
+      let cod = Number(btn.dataset.codigo);
+      let produto = buscarProdutoPorCodigo(cod);
+      let item = meuCarrinho.obterItem(cod);
+
+      if (item && produto && item.quantidade >= produto.estoque) {
+        exibirToast('Não é possível adicionar além do estoque (' + produto.estoque + ' unidades).', 'erro');
+        return;
+      }
+
+      meuCarrinho.aumentarQuantidade(cod);
+      atualizarCarrinhoUI();
+    });
+  });
+
+  $$('.btn-qty-minus', containerItens).forEach(btn => {
+    btn.addEventListener('click', () => {
+      let cod = Number(btn.dataset.codigo);
+      meuCarrinho.diminuirQuantidade(cod);
+      atualizarCarrinhoUI();
+    });
+  });
+
+  $$('.btn-remove-item', containerItens).forEach(btn => {
+    btn.addEventListener('click', () => {
+      let cod = Number(btn.dataset.codigo);
+      meuCarrinho.remover(cod);
+      atualizarCarrinhoUI();
+      exibirToast('Produto removido do carrinho.', 'sucesso');
+    });
+  });
 }
 
 function abrirCarrinho() {
@@ -322,14 +408,13 @@ function abrirModalCheckout() {
       <span>${formatarMoeda(subtotal)}</span>
     </div>
     <div class="checkout-line checkout-line--discount">
-      <span>Desconto Aplicado (10%):</span>
-      <span>- ${formatarMoeda(desconto)}</span>
+      <span>Cupom ORELHA10 (10%):</span>
+      <span>${desconto > 0 ? '- ' + formatarMoeda(desconto) : 'não aplicado'}</span>
     </div>
     <div class="checkout-line checkout-line--total">
       <span>Valor Total a Pagar:</span>
       <span class="checkout-total-val">${formatarMoeda(total)}</span>
     </div>
-    <p class="checkout-parcelas-info">Em até ${calcularParcelamento(total)}</p>
   `;
 
   modal.classList.add('is-open');
@@ -443,7 +528,6 @@ function abrirModalProduto(codigo) {
       </ul>
       <div class="modal-price-box">
         <span class="modal-price">${formatarMoeda(prod.preco)}</span>
-        <span class="modal-split">ou 12x de ${formatarMoeda(prod.preco / 12)} sem juros</span>
       </div>
       <div class="modal-actions">
         <button class="btn-modal-add" id="btn-modal-add-item" data-codigo="${prod.codigo}" ${botaoDisabled}>
@@ -488,11 +572,11 @@ function exibirToast(mensagem, tipo = 'sucesso') {
 
   if (toastIcon) {
     if (tipo === 'erro') {
-      toastIcon.textContent = '✕';
+      toastIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
       toastIcon.style.color = '#ff4757';
       toastIcon.style.background = 'rgba(255, 71, 87, 0.2)';
     } else {
-      toastIcon.textContent = '✓';
+      toastIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
       toastIcon.style.color = '#2ed573';
       toastIcon.style.background = 'rgba(46, 213, 115, 0.2)';
     }
@@ -509,6 +593,34 @@ function exibirToast(mensagem, tipo = 'sucesso') {
 document.addEventListener('DOMContentLoaded', () => {
   filtrarProdutos();
   atualizarCarrinhoUI();
+
+  const btnApplyCoupon = $('#btn-apply-coupon');
+  const inputCoupon = $('#cart-coupon-input');
+
+  if (btnApplyCoupon && inputCoupon) {
+    const processarCupom = () => {
+      let cod = inputCoupon.value.trim();
+      if (!cod) {
+        exibirToast('Digite o código do cupom (ex: ORELHA10).', 'erro');
+        return;
+      }
+      let res = aplicarCupom(cod);
+      if (res.sucesso) {
+        atualizarCarrinhoUI();
+        exibirToast(res.mensagem, 'sucesso');
+      } else {
+        exibirToast(res.mensagem, 'erro');
+      }
+    };
+
+    btnApplyCoupon.addEventListener('click', processarCupom);
+    inputCoupon.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        processarCupom();
+      }
+    });
+  }
 
   const searchInput = $('#catalog-search-input');
   const searchClear = $('#catalog-search-clear');

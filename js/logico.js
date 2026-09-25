@@ -1,8 +1,9 @@
 'use strict';
 
 var nomeLoja = 'ELETRO URNAS';
-var valorMinimoDesconto = 300.0;
 var taxaDesconto = 0.10;
+var codigoCupomValido = 'ORELHA10';
+var cupomAplicado = false;
 
 const formatarMoeda = (valor) => {
   return Number(valor).toLocaleString('pt-BR', {
@@ -11,18 +12,16 @@ const formatarMoeda = (valor) => {
   });
 };
 
-function calcularParcelamento(valorFinal) {
-  let parcelas = 1;
-  let textoParcelamento = '';
-  let maxParcelas = 12;
-
-  while (parcelas <= maxParcelas) {
-    let valorParcela = valorFinal / parcelas;
-    textoParcelamento = parcelas + 'x de ' + formatarMoeda(valorParcela) + ' sem juros';
-    parcelas++;
+function aplicarCupom(codigo) {
+  if (codigo.trim().toUpperCase() === codigoCupomValido) {
+    cupomAplicado = true;
+    return { sucesso: true, mensagem: 'Cupom ORELHA10 aplicado! 10% de desconto.' };
   }
+  return { sucesso: false, mensagem: 'Cupom inválido. Verifique o código e tente novamente.' };
+}
 
-  return textoParcelamento;
+function removerCupom() {
+  cupomAplicado = false;
 }
 
 class Produto {
@@ -160,7 +159,7 @@ class Carrinho {
     let subtotal = this.calcularSubtotal();
     let desconto = 0;
 
-    if (subtotal >= valorMinimoDesconto) {
+    if (cupomAplicado) {
       desconto = subtotal * taxaDesconto;
     } else {
       desconto = 0;
@@ -173,7 +172,10 @@ class Carrinho {
     let subtotal = this.calcularSubtotal();
     let desconto = this.calcularDesconto();
     let valorFinal = subtotal - desconto;
-    return valorFinal > 0 ? valorFinal : 0;
+    if (valorFinal > 0) {
+      return valorFinal;
+    }
+    return 0;
   }
 
   limpar() {
