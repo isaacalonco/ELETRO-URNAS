@@ -384,15 +384,10 @@ function abrirModalCheckout() {
     htmlItens += `
       <div class="checkout-item-row">
         <div class="checkout-item-row__left">
-          <img src="${item.produto.imagem}" alt="${item.produto.nome}" />
-          <div>
-            <strong>${item.produto.nome}</strong>
-            <small>${item.quantidade}x ${formatarMoeda(item.produto.preco)}</small>
-          </div>
+          <span class="checkout-item-row__qty">${item.quantidade}x</span>
+          <span class="checkout-item-row__name">${item.produto.nome}</span>
         </div>
-        <div class="checkout-item-row__right">
-          <span>${formatarMoeda(sub)}</span>
-        </div>
+        <span class="checkout-item-row__price">${formatarMoeda(sub)}</span>
       </div>
     `;
   }
