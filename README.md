@@ -1,72 +1,85 @@
-# ELETRO URNAS — Loja Virtual
+# ELETRO URNAS — E-Commerce
 
 Projeto desenvolvido para a disciplina **Programação para Web (GPE02M30026)**.  
 **Professor:** Ranyelson Neres Carvalho — Centro Universitário Católica
 
-Aplicação Web de vendas (*e-commerce*) desenvolvida utilizando **HTML5, CSS3 e JavaScript puro**, simulando uma loja virtual de eletrônicos e novidades tecnológicas, totalmente executada no navegador sem frameworks ou dependências externas.
+Aplicação Web de vendas (*e-commerce*) desenvolvida utilizando **HTML5, CSS3 e JavaScript puro**, simulando uma loja virtual premium de eletrônicos e novidades tecnológicas, totalmente executada no navegador sem frameworks ou dependências externas.
 
 ---
 
 ## 🚀 Funcionalidades
 
+- **Identidade Visual & Hero Section:**
+  - Layout moderno responsivo (*Dark Mode / Glassmorphism*).
+  - Vitrine editorial do iPhone com efeito dinâmico interativo via JavaScript/CSS.
+  - Navegação com blur e transições fluidas.
+
 - **Catálogo de Produtos Dinâmico:**
   - Produtos gerados dinamicamente via manipulação do DOM a partir de instâncias da classe `Produto`.
-  - Exibição de foto, nome, categoria, preço formatado em Real (R$), descrição e status do estoque.
-  - Bloqueio e indicação visual de produtos esgotados.
+  - Exibição de foto, nome, categoria, preço formatado em Real (R$), especificações técnicas e disponibilidade de estoque em tempo real.
+  - Bloqueio e indicação visual para produtos sem estoque (*Esgotado*).
 
-- **Filtros e Busca em Tempo Real:**
-  - Campo de busca textual por nome e descrição do item.
-  - Filtro por categorias com estrutura de seleção (`switch`).
+- **Busca & Filtros em Tempo Real:**
+  - Campo de busca textual por nome de produto.
+  - Filtro interativo por categorias (*Smartphones, Computadores, Áudio, Tablets, Smartwatches*).
+  - Feedback visual e botão de reset quando a busca não retorna resultados.
 
-- **Carrinho de Compras Interativo:**
+- **Carrinho de Compras Interativo (Drawer Lateral):**
   - Gerenciado através da classe `Carrinho`.
-  - Adição de produtos, incremento e decremento de quantidades respeitando o estoque.
+  - Adição de produtos com atualização instantânea do badge e abertura de gaveta lateral.
+  - Incremento e decremento de quantidades respeitando o limite de estoque.
   - Remoção individual e opção de esvaziar o carrinho.
-  - Atualização em tempo real do contador de itens e subtotal.
 
 - **Cálculo da Compra & Regra de Desconto:**
-  - Aplicação de **10% de desconto** para compras a partir de R$ 300,00.
+  - Aplicação condicional de **10% de desconto** para compras a partir de R$ 300,00.
   - Simulação de parcelamento sem juros em até 12x.
 
 - **Finalização da Compra (Checkout):**
-  - Modal com resumo completo dos produtos, quantidades, desconto e valor total.
+  - Modal com resumo detalhado do pedido (itens, quantidades, subtotal, desconto e total).
   - Baixa automática no estoque dos itens adquiridos.
-  - Confirmação com número de pedido gerado.
+  - Confirmação com número do pedido gerado dinamicamente.
 
 ---
 
-## 🛠️ Tecnologias e Conceitos Aplicados
+## 🛠️ Arquitetura & Divisão do JavaScript
 
-- **HTML5:** Estruturação semântica da página.
-- **CSS3:** Estilização limpa, moderna, modular e responsiva com Flexbox e CSS Grid.
-- **JavaScript (Vanilla / ES6+):**
-  - Declaração de variáveis com `var`, `let` e `const`.
-  - Tipos primitivos: `string`, `number`, `boolean`, `array` e `object`.
-  - Operadores aritméticos (`+`, `-`, `*`, `/`) e de comparação (`===`, `!==`, `>`, `<`).
-  - Estruturas de controle de fluxo: `if / else if / else` e `switch`.
-  - Estruturas de repetição: `for` e `while`.
-  - Programação Orientada a Objetos (POO): Classes `Produto` e `Carrinho` com atributos e métodos.
-  - Funções tradicionais e arrow functions.
-  - Manipulação do DOM (`document.getElementById`, `createElement`, `append`, `innerHTML`, `textContent`, `addEventListener`).
+Para manter o código organizado, modular e de fácil manutenção, o JavaScript foi dividido em duas camadas:
+
+1. **`js/logico.js` (Camada Lógica / Regras de Negócio):**
+   - Variáveis globais e constantes (`var`, `let`, `const`).
+   - Classes Orientadas a Objetos: `Produto` e `Carrinho`.
+   - Métodos de manipulação de estoque e cálculo de valores (subtotal, desconto, total, parcelas).
+   - Catálogo de dados dos produtos (`catalogoProdutos`).
+   - Funções puras de busca e filtragem (`buscarProdutoPorCodigo`, `obterProdutosFiltrados`).
+
+2. **`js/ui.js` (Camada de Interface, DOM e CSS):**
+   - Manipulação de seletores e injeção dinâmica no DOM.
+   - Aplicação de classes CSS para estados (`.is-open`, `.is-active`, etc.).
+   - Controle de abertura e fechamento de modais e do drawer lateral com backdrop.
+   - Efeitos visuais (spotlight do Hero, navbar com blur ao rolar a página).
+   - Sistema de notificações flutuantes (*toasts*).
+   - Vinculação de eventos de formulários, cliques e atalhos de teclado (Escape).
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura de Arquivos
 
 ```text
 PROGRAMCAO-WEB/
 │
-├── index.html        # Página principal e estrutura HTML
+├── index.html        # Página principal e marcação semântica
 ├── README.md         # Documentação da aplicação
 │
 ├── css/
-│   ├── reset.css     # Reset básico de estilos
-│   └── styles.css    # Estilização limpa e responsiva da loja
+│   ├── reset.css     # Normalização e reset básico de estilos
+│   ├── tokens.css    # Design tokens (cores, fontes, espaçamentos)
+│   └── styles.css    # Estilização completa, dark mode e responsividade
 │
 ├── js/
-│   └── main.js       # Classes, catálogo e manipulação do DOM
+│   ├── logico.js     # JavaScript Lógico: Classes, regras de negócio e cálculos
+│   └── ui.js         # JavaScript de CSS/Interface: DOM, animações e modais
 │
-└── assets/           # Imagens dos produtos
+└── assets/           # Imagens dos produtos e backgrounds
 ```
 
 ---
@@ -77,4 +90,4 @@ PROGRAMCAO-WEB/
    ```bash
    git clone https://github.com/isaacalonco/ELETRO-URNAS.git
    ```
-2. Abra o arquivo `index.html` em qualquer navegador web (Google Chrome, Firefox, Edge, etc.) ou através da extensão *Live Server*.
+2. Abra o arquivo `index.html` em qualquer navegador web moderno (Chrome, Edge, Firefox, Safari) ou utilize uma extensão como o *Live Server*.
