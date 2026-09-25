@@ -91,3 +91,5 @@ PROGRAMCAO-WEB/
    git clone https://github.com/isaacalonco/ELETRO-URNAS.git
    ```
 2. Abra o arquivo `index.html` em qualquer navegador web moderno (Chrome, Edge, Firefox, Safari) ou utilize uma extensão como o *Live Server*.
+
+Raphael Gondim 
