@@ -1171,6 +1171,10 @@ body {
 }
 
 .btn-card-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   padding: 8px 14px;
   border-radius: var(--radius-full);
   background: var(--color-accent);
@@ -1183,6 +1187,7 @@ body {
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  line-height: 1;
 }
 
 .btn-card-add:hover {
@@ -1191,7 +1196,11 @@ body {
 }
 
 .btn-card-details {
-  padding: 7px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 11px;
   border-radius: var(--radius-full);
   background: transparent;
   border: 1px solid var(--color-border);
@@ -1202,12 +1211,20 @@ body {
   transition: all var(--transition-fast);
   cursor: pointer;
   white-space: nowrap;
+  line-height: 1;
 }
 
 .btn-card-details:hover {
   border-color: var(--color-accent);
   color: var(--color-white);
   background: rgba(58, 142, 255, 0.1);
+}
+
+.btn-card-add svg,
+.btn-card-details svg {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 
