@@ -1,79 +1,72 @@
-# ELETRO URNAS — E-Commerce
+# ELETRO URNAS — Loja Virtual
 
-Projeto desenvolvido para a atividade **N1 – AT2 - Programação para Web (2026)**.
+Projeto desenvolvido para a disciplina **Programação para Web (GPE02M30026)**.  
+**Professor:** Ranyelson Neres Carvalho — Centro Universitário Católica
 
-Aplicação Web de vendas (*e-commerce*) desenvolvida utilizando **HTML5, CSS3 e JavaScript puro**, simulando as principais funcionalidades de uma loja virtual premium de eletrônicos e gadgets de ponta.
+Aplicação Web de vendas (*e-commerce*) desenvolvida utilizando **HTML5, CSS3 e JavaScript puro**, simulando uma loja virtual de eletrônicos e novidades tecnológicas, totalmente executada no navegador sem frameworks ou dependências externas.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- **Página Inicial Completa:**
-  - Identidade visual moderna e responsiva (*Dark Mode / Aesthetic Glassmorphism*).
-  - Vitrine em destaque (*Hero Showcase*) do iPhone 18 Pro Max com detalhes técnicos.
-  - Seções editoriais institucionais e canais de contato.
-
 - **Catálogo de Produtos Dinâmico:**
-  - Produtos gerados dinamicamente via manipulação do DOM a partir de instâncias de classes JavaScript.
-  - Exibição de imagem, nome, categoria, preço formatado em BRL, especificações técnicas e disponibilidade de estoque em tempo real.
-  - Tratamento de itens sem estoque (ex: exibição de badge *Esgotado* e bloqueio do botão de compra).
+  - Produtos gerados dinamicamente via manipulação do DOM a partir de instâncias da classe `Produto`.
+  - Exibição de foto, nome, categoria, preço formatado em Real (R$), descrição e status do estoque.
+  - Bloqueio e indicação visual de produtos esgotados.
 
-- **Busca & Filtros:**
-  - Campo de busca em tempo real com pesquisa por nome do produto.
-  - Filtros interativos por categoria (*Smartphones, Computadores, Áudio, Tablets, Smartwatches*).
-  - Tratamento e feedback visual quando nenhum produto atende aos critérios da busca.
+- **Filtros e Busca em Tempo Real:**
+  - Campo de busca textual por nome e descrição do item.
+  - Filtro por categorias com estrutura de seleção (`switch`).
 
-- **Carrinho de Compras Interativo (Drawer Lateral):**
-  - Adição de produtos ao carrinho com atualização instantânea da badge no cabeçalho.
-  - Listagem dos itens com foto, nome, valor unitário, quantidade e subtotal por produto.
-  - Botões para aumentar (`+`) e diminuir (`−`) a quantidade, respeitando estritamente o limite de estoque disponível.
-  - Remoção individual de itens e opção para esvaziar o carrinho.
+- **Carrinho de Compras Interativo:**
+  - Gerenciado através da classe `Carrinho`.
+  - Adição de produtos, incremento e decremento de quantidades respeitando o estoque.
+  - Remoção individual e opção de esvaziar o carrinho.
+  - Atualização em tempo real do contador de itens e subtotal.
 
 - **Cálculo da Compra & Regra de Desconto:**
-  - Atualização automática em tempo real do total de itens, subtotal, desconto e valor final.
-  - Aplicação condicional de **10% de desconto** para compras a partir de R$ 300,00, com aviso informativo na sacola.
-  - Cálculo e simulação de opções de parcelamento sem juros em até 12x.
+  - Aplicação de **10% de desconto** para compras a partir de R$ 300,00.
+  - Simulação de parcelamento sem juros em até 12x.
 
 - **Finalização da Compra (Checkout):**
-  - Validação impedindo finalização com carrinho vazio.
-  - Modal com resumo detalhado do pedido (itens, quantidades, subtotal, desconto aplicado e total a pagar).
-  - Confirmação de pedido com baixa automática no estoque dos produtos e modal de confirmação com código de rastreio/pedido gerado.
+  - Modal com resumo completo dos produtos, quantidades, desconto e valor total.
+  - Baixa automática no estoque dos itens adquiridos.
+  - Confirmação com número de pedido gerado.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias e Conceitos Aplicados
 
-- **HTML5:** Estrutura semântica e acessível.
-- **CSS3:** Design System com variáveis CSS (Tokens), flexbox, grid, animações fluidas e suporte a responsividade.
-- **JavaScript (ES6+):**
-  - Variáveis com `let`, `var` e `const`.
-  - Tipos primitivos: `string`, `number`, `boolean`.
-  - Operadores aritméticos e de comparação.
-  - Estruturas condicionais `if` / `else`.
-  - Estruturas de repetição `for` e `while`.
-  - Programação Orientada a Objetos com as classes `Produto` e `Carrinho`.
+- **HTML5:** Estruturação semântica da página.
+- **CSS3:** Estilização limpa, moderna, modular e responsiva com Flexbox e CSS Grid.
+- **JavaScript (Vanilla / ES6+):**
+  - Declaração de variáveis com `var`, `let` e `const`.
+  - Tipos primitivos: `string`, `number`, `boolean`, `array` e `object`.
+  - Operadores aritméticos (`+`, `-`, `*`, `/`) e de comparação (`===`, `!==`, `>`, `<`).
+  - Estruturas de controle de fluxo: `if / else if / else` e `switch`.
+  - Estruturas de repetição: `for` e `while`.
+  - Programação Orientada a Objetos (POO): Classes `Produto` e `Carrinho` com atributos e métodos.
   - Funções tradicionais e arrow functions.
-  - Manipulação avançada do DOM sem frameworks ou dependências externas.
+  - Manipulação do DOM (`document.getElementById`, `createElement`, `append`, `innerHTML`, `textContent`, `addEventListener`).
 
 ---
 
-## 📁 Estrutura de Pastas
+## 📁 Estrutura do Projeto
 
 ```text
 PROGRAMCAO-WEB/
 │
-├── index.html        # Página principal da aplicação
-├── README.md         # Documentação do projeto
+├── index.html        # Página principal e estrutura HTML
+├── README.md         # Documentação da aplicação
 │
 ├── css/
-│   ├── reset.css     # Normalização e reset de estilos
-│   ├── tokens.css    # Variáveis e tokens de design (cores, fontes, espaçamentos)
-│   └── styles.css    # Folhas de estilo da aplicação e componentes
+│   ├── reset.css     # Reset básico de estilos
+│   └── styles.css    # Estilização limpa e responsiva da loja
 │
 ├── js/
-│   └── main.js       # Classes, lógica de negócio, catálogo e eventos do DOM
+│   └── main.js       # Classes, catálogo e manipulação do DOM
 │
-└── assets/           # Imagens dos produtos e backgrounds
+└── assets/           # Imagens dos produtos
 ```
 
 ---
@@ -84,5 +77,4 @@ PROGRAMCAO-WEB/
    ```bash
    git clone https://github.com/isaacalonco/ELETRO-URNAS.git
    ```
-2. Abra o arquivo `index.html` diretamente em seu navegador web (Google Chrome, Firefox, Edge, Safari, etc.) ou execute através de uma extensão como o *Live Server*.
-3. Não é necessária a instalação de bibliotecas, pacotes npm ou configuração de banco de dados.
+2. Abra o arquivo `index.html` em qualquer navegador web (Google Chrome, Firefox, Edge, etc.) ou através da extensão *Live Server*.
