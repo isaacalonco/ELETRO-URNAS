@@ -2,6 +2,7 @@
 
 var nomeLoja = 'ELETRO URNAS';
 var taxaDesconto = 0.10;
+var valorMinimoDesconto = 300;
 var codigoCupomValido = 'ORELHA10';
 var cupomAplicado = false;
 
@@ -159,7 +160,9 @@ class Carrinho {
     let subtotal = this.calcularSubtotal();
     let desconto = 0;
 
-    if (cupomAplicado) {
+    // Regra condicional automática por valor total (>= R$ 300 ganha 10% de desconto)
+    // O cupom continua funcionando como alternativa/plus
+    if (subtotal >= valorMinimoDesconto || cupomAplicado) {
       desconto = subtotal * taxaDesconto;
     } else {
       desconto = 0;

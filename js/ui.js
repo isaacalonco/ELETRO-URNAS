@@ -187,7 +187,17 @@ function atualizarCarrinhoUI() {
   }
 
   if (discountRow) {
-    discountRow.style.display = cupomAplicado && desconto > 0 ? 'flex' : 'none';
+    discountRow.style.display = desconto > 0 ? 'flex' : 'none';
+    const labelDiscount = discountRow.querySelector('.cart-summary-label');
+    if (labelDiscount) {
+      if (subtotal >= valorMinimoDesconto) {
+        labelDiscount.textContent = 'Desconto Automático (10%)';
+      } else if (cupomAplicado) {
+        labelDiscount.textContent = 'Cupom ORELHA10 (10%)';
+      } else {
+        labelDiscount.textContent = 'Desconto (10%)';
+      }
+    }
   }
 
   if (totalElem) {
@@ -195,7 +205,14 @@ function atualizarCarrinhoUI() {
   }
 
   if (bannerDesconto) {
-    if (cupomAplicado) {
+    if (subtotal >= valorMinimoDesconto) {
+      bannerDesconto.className = 'cart-discount-banner is-active';
+      bannerDesconto.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span><strong>10% de desconto aplicado!</strong> (Compras a partir de ${formatarMoeda(valorMinimoDesconto)})</span>
+      `;
+      bannerDesconto.style.display = 'flex';
+    } else if (cupomAplicado) {
       bannerDesconto.className = 'cart-discount-banner is-active';
       bannerDesconto.innerHTML = `
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -203,10 +220,11 @@ function atualizarCarrinhoUI() {
       `;
       bannerDesconto.style.display = 'flex';
     } else {
+      let falta = valorMinimoDesconto - subtotal;
       bannerDesconto.className = 'cart-discount-banner is-notice';
       bannerDesconto.innerHTML = `
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        <span>Possui cupom? Digite <strong>ORELHA10</strong> abaixo para 10% de desconto.</span>
+        <span>Adicione mais <strong>${formatarMoeda(falta)}</strong> para ganhar 10% de desconto automático!</span>
       `;
       bannerDesconto.style.display = totalItens > 0 ? 'flex' : 'none';
     }
@@ -403,8 +421,8 @@ function abrirModalCheckout() {
       <span>${formatarMoeda(subtotal)}</span>
     </div>
     <div class="checkout-line checkout-line--discount">
-      <span>Cupom ORELHA10 (10%):</span>
-      <span>${desconto > 0 ? '- ' + formatarMoeda(desconto) : 'não aplicado'}</span>
+      <span>Desconto Aplicado (10%):</span>
+      <span>${desconto > 0 ? '- ' + formatarMoeda(desconto) : 'R$ 0,00'}</span>
     </div>
     <div class="checkout-line checkout-line--total">
       <span>Valor Total a Pagar:</span>
